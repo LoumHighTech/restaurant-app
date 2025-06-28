@@ -1,0 +1,398 @@
+   <!-- Bouton de retour en haut -->
+    <button id="backToTop"
+        class="fixed bottom-6 right-6 bg-primary text-white p-3 rounded-full shadow-lg hover:bg-secondary transition hidden dark:bg-blue-600 dark:hover:bg-blue-700"
+        title="Retour en haut">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Modal pour connexion/inscription -->
+    <div id="auth-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="w-full max-w-md mx-4">
+            <div class="modal-content bg-white rounded-xl shadow-2xl overflow-hidden dark:bg-gray-800">
+                <!-- Tabs -->
+                <div class="flex border-b border-gray-200 dark:border-gray-700">
+                    <button id="modal-login-tab"
+                        class="tab-btn flex-1 py-4 font-semibold text-gray-700 text-center active dark:text-gray-300"
+                        data-tab="login">Connexion</button>
+                    <button id="modal-signup-tab" class="tab-btn flex-1 py-4 font-semibold text-gray-700 text-center dark:text-gray-300"
+                        data-tab="signup">Inscription</button>
+                </div>
+
+                <!-- Contenu -->
+                <div class="p-6">
+                    <!-- Connexion -->
+                    <div id="modal-login-form" class="space-y-6">
+                        <div class="text-center mb-6">
+                            <h1 class="text-2xl font-bold text-gray-800 dark:text-white mb-2">Accédez à votre compte</h1>
+                            <p class="text-gray-600 dark:text-gray-300">Gérez vos commandes et abonnements</p>
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2 dark:text-gray-300">Email</label>
+                            <div class="relative">
+                                <input type="email"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500"
+                                    placeholder="votre@email.com">
+                                <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                    <i class="fas fa-envelope text-gray-400"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2 dark:text-gray-300">Mot de passe</label>
+                            <div class="relative">
+                                <input type="password"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500"
+                                    placeholder="••••••••">
+                                <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                    <i class="fas fa-lock text-gray-400"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button
+                            class="w-full py-3 bg-primary text-white font-semibold rounded-lg hover:bg-secondary transition dark:bg-blue-600 dark:hover:bg-blue-700">Se
+                            connecter</button>
+
+                        <!-- Types de comptes pour Connexion -->
+                        <div class="pt-4 border-t border-gray-200 dark:border-gray-700">
+                            <p class="text-gray-600 text-center mb-3 dark:text-gray-300">Types de comptes disponibles :</p>
+                            <div class="grid grid-cols-3 gap-3" id="login-account-types">
+                                <div class="account-type flex flex-col items-center p-3 rounded-lg cursor-pointer dark:hover:bg-gray-700">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mb-2 dark:bg-blue-900/30 dark:text-blue-400">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <span class="text-sm font-medium dark:text-gray-300">Client</span>
+                                </div>
+                                <div class="account-type flex flex-col items-center p-3 rounded-lg cursor-pointer dark:hover:bg-gray-700">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-green-100 text-green-600 flex items-center justify-center mb-2 dark:bg-green-900/30 dark:text-green-400">
+                                        <i class="fas fa-cog"></i>
+                                    </div>
+                                    <span class="text-sm font-medium dark:text-gray-300">Admin</span>
+                                </div>
+                                <div class="account-type flex flex-col items-center p-3 rounded-lg cursor-pointer dark:hover:bg-gray-700">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center mb-2 dark:bg-orange-900/30 dark:text-orange-400">
+                                        <i class="fas fa-motorcycle"></i>
+                                    </div>
+                                    <span class="text-sm font-medium dark:text-gray-300">Livreur</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Inscription -->
+                    <div id="modal-signup-form" class="space-y-6 hidden">
+                        <div class="text-center mb-6">
+                            <h1 class="text-1xl font-bold text-gray-800 mb-2 dark:text-white">Créez votre compte</h1>
+                        </div>
+
+                        <div class="relative">
+                            <label class="block text-gray-700 font-medium mb-2 dark:text-gray-300">Type de compte</label>
+                            <div id="custom-select" class="relative">
+                                <button id="select-btn"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg text-left flex items-center justify-between dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                    <span id="selected-option"><i class="fas fa-user text-blue-600 mr-2"></i>Client</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+
+                                <div id="select-options" class="absolute z-10 w-full bg-white border border-gray-300 mt-1 rounded-lg shadow-lg hidden dark:bg-gray-700 dark:border-gray-600">
+                                    <div class="option px-4 py-2 hover:bg-gray-100 flex items-center cursor-pointer dark:hover:bg-gray-600" data-value="client">
+                                        <i class="fas fa-user text-blue-600 mr-2"></i> Client
+                                    </div>
+                                    <div class="option px-4 py-2 hover:bg-gray-100 flex items-center cursor-pointer dark:hover:bg-gray-600" data-value="admin">
+                                        <i class="fas fa-cog text-green-600 mr-2"></i> Admin
+                                    </div>
+                                    <div class="option px-4 py-2 hover:bg-gray-100 flex items-center cursor-pointer dark:hover:bg-gray-600" data-value="livreur">
+                                        <i class="fas fa-motorcycle text-orange-600 mr-2"></i> Livreur
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" name="account_type" id="account-type-hidden" value="client">
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2 dark:text-gray-300">Nom complet</label>
+                                <div class="relative">
+                                    <input type="text"
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500"
+                                        placeholder="John Doe">
+                                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                        <i class="fas fa-user text-gray-400"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2 dark:text-gray-300">Téléphone</label>
+                                <div class="relative">
+                                    <input type="tel"
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500"
+                                        placeholder="+221 XX XXX XX XX">
+                                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                        <i class="fas fa-phone text-gray-400"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2 dark:text-gray-300">Email</label>
+                            <div class="relative">
+                                <input type="email"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500"
+                                    placeholder="votre@email.com">
+                                <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                    <i class="fas fa-envelope text-gray-400"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="delivery-address">
+                            <label class="block text-gray-700 font-medium mb-2 dark:text-gray-300">Adresse de livraison</label>
+                            <div class="relative">
+                                <input type="text"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500"
+                                    placeholder="Chambre, G, Village.">
+                                <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                    <i class="fas fa-home text-gray-400"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2 dark:text-gray-300">Mot de passe</label>
+                            <div class="relative">
+                                <input type="password"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500"
+                                    placeholder="••••••••">
+                                <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                    <i class="fas fa-lock text-gray-400"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button
+                            class="w-full py-3 bg-primary text-white font-semibold rounded-lg hover:bg-secondary transition dark:bg-blue-600 dark:hover:bg-blue-700">Créer
+                            mon compte</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Bouton de retour en haut
+        const backToTopButton = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('hidden');
+            } else {
+                backToTopButton.classList.add('hidden');
+            }
+        });
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Gestion de la modale
+        const authModal = document.getElementById('auth-modal');
+        const loginButton = document.getElementById('login-button');
+        const signupButton = document.getElementById('signup-button');
+        const modalLoginTab = document.getElementById('modal-login-tab');
+        const modalSignupTab = document.getElementById('modal-signup-tab');
+        const modalLoginForm = document.getElementById('modal-login-form');
+        const modalSignupForm = document.getElementById('modal-signup-form');
+
+        // Ouvrir modale de connexion
+        loginButton.addEventListener('click', () => {
+            authModal.classList.remove('hidden');
+            setTimeout(() => {
+                authModal.classList.add('modal-open');
+            }, 10);
+            modalLoginTab.classList.add('active');
+            modalSignupTab.classList.remove('active');
+            modalLoginForm.classList.remove('hidden');
+            modalSignupForm.classList.add('hidden');
+        });
+
+        // Ouvrir modale d'inscription
+        signupButton.addEventListener('click', () => {
+            authModal.classList.remove('hidden');
+            setTimeout(() => {
+                authModal.classList.add('modal-open');
+            }, 10);
+            modalSignupTab.classList.add('active');
+            modalLoginTab.classList.remove('active');
+            modalSignupForm.classList.remove('hidden');
+            modalLoginForm.classList.add('hidden');
+        });
+
+        // Fermer la modale
+        authModal.addEventListener('click', (e) => {
+            if (e.target === authModal) {
+                authModal.classList.remove('modal-open');
+                setTimeout(() => {
+                    authModal.classList.add('hidden');
+                }, 300);
+            }
+        });
+
+        // Gestion des onglets
+        modalLoginTab.addEventListener('click', () => {
+            modalLoginTab.classList.add('active');
+            modalSignupTab.classList.remove('active');
+            modalLoginForm.classList.remove('hidden');
+            modalSignupForm.classList.add('hidden');
+        });
+
+        modalSignupTab.addEventListener('click', () => {
+            modalSignupTab.classList.add('active');
+            modalLoginTab.classList.remove('active');
+            modalSignupForm.classList.remove('hidden');
+            modalLoginForm.classList.add('hidden');
+        });
+
+        // Sélection de type de compte pour inscription
+        const signupTypes = document.querySelectorAll('#signup-account-types .account-type');
+        signupTypes.forEach(type => {
+            type.addEventListener('click', () => {
+                signupTypes.forEach(t => t.classList.remove('selected'));
+                type.classList.add('selected');
+            });
+        });
+
+        // Sélection de type de compte pour connexion
+        const loginTypes = document.querySelectorAll('#login-account-types .account-type');
+        loginTypes.forEach(type => {
+            type.addEventListener('click', () => {
+                loginTypes.forEach(t => t.classList.remove('selected'));
+                type.classList.add('selected');
+            });
+        });
+
+        //selection de type de compte
+        const btn = document.getElementById('select-btn');
+        const options = document.getElementById('select-options');
+        const hiddenInput = document.getElementById('account-type-hidden');
+        const selected = document.getElementById('selected-option');
+
+        btn.addEventListener('click', () => {
+            options.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('#select-options .option').forEach(option => {
+            option.addEventListener('click', () => {
+                selected.innerHTML = option.innerHTML;
+                hiddenInput.value = option.getAttribute('data-value');
+                options.classList.add('hidden');
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const closeMenuButton = document.getElementById('close-menu');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            // Ouvrir le menu mobile
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.add('open');
+                mobileMenuButton.classList.add('open');
+                document.body.style.overflow = 'hidden'; // Empêcher le défilement
+            });
+            
+            // Fermer le menu mobile
+            closeMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.remove('open');
+                mobileMenuButton.classList.remove('open');
+                document.body.style.overflow = ''; // Rétablir le défilement
+            });
+            
+            // Fermer le menu en cliquant à l'extérieur
+            document.addEventListener('click', function(event) {
+                if (!mobileMenu.contains(event.target) && !mobileMenuButton.contains(event.target) && mobileMenu.classList.contains('open')) {
+                    mobileMenu.classList.remove('open');
+                    mobileMenuButton.classList.remove('open');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMenu = document.getElementById('close-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.remove('translate-x-full');
+        });
+
+        closeMenu.addEventListener('click', () => {
+            mobileMenu.classList.add('translate-x-full');
+        });
+        
+        // Gestion du thème sombre/clair
+        const themeToggle = document.getElementById('themeToggle');
+        const themeToggleMobile = document.getElementById('themeToggleMobile');
+        const sunIcon = document.getElementById('sunIcon');
+        const moonIcon = document.getElementById('moonIcon');
+        const sunIconMobile = document.getElementById('sunIconMobile');
+        const moonIconMobile = document.getElementById('moonIconMobile');
+        const htmlElement = document.documentElement;
+
+        // Vérifier la préférence utilisateur ou le localStorage
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        
+        if (currentTheme === 'dark') {
+            htmlElement.classList.add('dark');
+            sunIcon.classList.add('hidden');
+            moonIcon.classList.remove('hidden');
+            sunIconMobile.classList.add('hidden');
+            moonIconMobile.classList.remove('hidden');
+        } else {
+            htmlElement.classList.remove('dark');
+            sunIcon.classList.remove('hidden');
+            moonIcon.classList.add('hidden');
+            sunIconMobile.classList.remove('hidden');
+            moonIconMobile.classList.add('hidden');
+        }
+
+        // Écouter le clic sur le bouton desktop
+        themeToggle.addEventListener('click', () => {
+            toggleTheme();
+        });
+        
+        // Écouter le clic sur le bouton mobile
+        themeToggleMobile.addEventListener('click', () => {
+            toggleTheme();
+        });
+        
+        function toggleTheme() {
+            htmlElement.classList.toggle('dark');
+            
+            if (htmlElement.classList.contains('dark')) {
+                localStorage.setItem('theme', 'dark');
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+                sunIconMobile.classList.add('hidden');
+                moonIconMobile.classList.remove('hidden');
+            } else {
+                localStorage.setItem('theme', 'light');
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+                sunIconMobile.classList.remove('hidden');
+                moonIconMobile.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+
+</html> la derniere partie du premier fichier

@@ -1,0 +1,167 @@
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f3f4f6;
+            scroll-behavior: smooth;
+            transition: background-color 0.3s;
+        }
+
+        body.dark {
+            background-color: #121826;
+        }
+
+        .dashboard-card {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .delivery-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid #f97316;
+        }
+
+        .delivery-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-bar {
+            height: 8px;
+            border-radius: 4px;
+            background: linear-gradient(90deg, #3b82f6, #10b981);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .status-pending {
+            background-color: #fffbeb;
+            color: #f59e0b;
+            border: 1px solid #fcd34d;
+        }
+
+        .status-in-progress {
+            background-color: #eff6ff;
+            color: #3b82f6;
+            border: 1px solid #93c5fd;
+        }
+
+        .status-completed {
+            background-color: #ecfdf5;
+            color: #10b981;
+            border: 1px solid #6ee7b7;
+        }
+
+        .status-cancelled {
+            background-color: #fef2f2;
+            color: #ef4444;
+            border: 1px solid #fca5a5;
+        }
+
+        /* Styles pour le mode sombre */
+        .dark .bg-white {
+            background-color: #1e293b;
+        }
+
+        .dark .text-gray-800 {
+            color: #e5e7eb;
+        }
+
+        .dark .text-gray-600 {
+            color: #9ca3af;
+        }
+
+        .dark .bg-gray-100 {
+            background-color: #1f2937;
+        }
+
+        .dark .bg-gray-50 {
+            background-color: #1f2937;
+        }
+
+        .dark .border-gray-200 {
+            border-color: #374151;
+        }
+
+        .dark .bg-gray-800 {
+            background-color: #111827;
+        }
+
+        .dark .bg-gray-200 {
+            background-color: #374151;
+        }
+
+        .dark .bg-blue-100 {
+            background-color: #1e3a8a;
+        }
+
+        .dark .text-blue-600 {
+            color: #93c5fd;
+        }
+
+        .dark .bg-green-100 {
+            background-color: #064e3b;
+        }
+
+        .dark .text-green-600 {
+            color: #6ee7b7;
+        }
+
+        .dark .bg-purple-100 {
+            background-color: #4c1d95;
+        }
+
+        .dark .text-purple-600 {
+            color: #c4b5fd;
+        }
+
+        .dark .bg-yellow-100 {
+            background-color: #713f12;
+        }
+
+        .dark .text-yellow-600 {
+            color: #fcd34d;
+        }
+
+        .dark .status-pending {
+            background-color: #422006;
+            color: #fcd34d;
+            border-color: #92400e;
+        }
+
+        .dark .status-in-progress {
+            background-color: #1e3a8a;
+            color: #93c5fd;
+            border-color: #1d4ed8;
+        }
+
+        .dark .status-completed {
+            background-color: #022c22;
+            color: #34d399;
+            border-color: #047857;
+        }
+
+        .dark .status-cancelled {
+            background-color: #450a0a;
+            color: #fca5a5;
+            border-color: #b91c1c;
+        }
+
+        .dark-mode-toggle {
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode-toggle:hover {
+            transform: scale(1.1);
+        }
+  
