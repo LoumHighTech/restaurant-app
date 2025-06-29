@@ -57,12 +57,10 @@ tailwind.config = {
 
 // Ajoutez cette fonction à votre initialisation
 document.addEventListener('DOMContentLoaded', () => {
-    setupThemeToggle();
     setupMobileMenu();
     setupAuthModal();
     setupAccountTypeSelect();
     setupBackToTop();
-    setupActiveNavigation(); // Ajoutez cette ligne
 });
 
 // Gestion du menu mobile
@@ -88,56 +86,63 @@ function setupMobileMenu() {
     }
 }
 
-// Gestion de la modale d'authentification
-function setupAuthModal() {
-    // Ajoutez cette ligne au début de votre fonction setupAuthModal
-    window.openModal = openModal;
-    const authModal = document.getElementById('auth-modal');
-    const loginButton = document.getElementById('login-button');
-    const signupButton = document.getElementById('signup-button');
-    const modalLoginTab = document.getElementById('modal-login-tab');
-    const modalSignupTab = document.getElementById('modal-signup-tab');
-    const modalLoginForm = document.getElementById('modal-login-form');
-    const modalSignupForm = document.getElementById('modal-signup-form');
+// Gestion de la modale d'authentification // Gestion de la modale
+        const authModal = document.getElementById('auth-modal');
+        const loginButton = document.getElementById('login-button');
+        const signupButton = document.getElementById('signup-button');
+        const modalLoginTab = document.getElementById('modal-login-tab');
+        const modalSignupTab = document.getElementById('modal-signup-tab');
+        const modalLoginForm = document.getElementById('modal-login-form');
+        const modalSignupForm = document.getElementById('modal-signup-form');
 
-    // Ajoutez ceci dans la fonction setupAuthModal
-    const switchToSignupLink = document.getElementById('switch-to-signup');
-    if (switchToSignupLink) {
-        switchToSignupLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            openModal('signup');
-        });
-    }
-
-    function openModal(tab) {
-        authModal.classList.remove('hidden');
-        setTimeout(() => authModal.classList.add('modal-open'), 10);
-        
-        if (tab === 'login') {
+        // Ouvrir modale de connexion
+        loginButton.addEventListener('click', () => {
+            authModal.classList.remove('hidden');
+            setTimeout(() => {
+                authModal.classList.add('modal-open');
+            }, 10);
             modalLoginTab.classList.add('active');
             modalSignupTab.classList.remove('active');
             modalLoginForm.classList.remove('hidden');
             modalSignupForm.classList.add('hidden');
-        } else {
+        });
+
+        // Ouvrir modale d'inscription
+        signupButton.addEventListener('click', () => {
+            authModal.classList.remove('hidden');
+            setTimeout(() => {
+                authModal.classList.add('modal-open');
+            }, 10);
             modalSignupTab.classList.add('active');
             modalLoginTab.classList.remove('active');
             modalSignupForm.classList.remove('hidden');
             modalLoginForm.classList.add('hidden');
-        }
-    }
+        });
 
-    function closeModal() {
-        authModal.classList.remove('modal-open');
-        setTimeout(() => authModal.classList.add('hidden'), 300);
-    }
+        // Fermer la modale
+        authModal.addEventListener('click', (e) => {
+            if (e.target === authModal) {
+                authModal.classList.remove('modal-open');
+                setTimeout(() => {
+                    authModal.classList.add('hidden');
+                }, 300);
+            }
+        });
 
-    if (loginButton) loginButton.addEventListener('click', () => openModal('login'));
-    if (signupButton) signupButton.addEventListener('click', () => openModal('signup'));
-    if (authModal) authModal.addEventListener('click', (e) => e.target === authModal && closeModal());
-    if (modalLoginTab) modalLoginTab.addEventListener('click', () => openModal('login'));
-    if (modalSignupTab) modalSignupTab.addEventListener('click', () => openModal('signup'));
-    
-}
+        // Gestion des onglets
+        modalLoginTab.addEventListener('click', () => {
+            modalLoginTab.classList.add('active');
+            modalSignupTab.classList.remove('active');
+            modalLoginForm.classList.remove('hidden');
+            modalSignupForm.classList.add('hidden');
+        });
+
+        modalSignupTab.addEventListener('click', () => {
+            modalSignupTab.classList.add('active');
+            modalLoginTab.classList.remove('active');
+            modalSignupForm.classList.remove('hidden');
+            modalLoginForm.classList.add('hidden');
+        });
 
 // Gestion du menu déroulant de type de compte
 function setupAccountTypeSelect() {
@@ -208,15 +213,6 @@ function setupBackToTop() {
     }
 }
 
-// Initialisation de toutes les fonctionnalités
-document.addEventListener('DOMContentLoaded', () => {
-    setupThemeToggle();
-    setupMobileMenu();
-    setupAuthModal();
-    setupAccountTypeSelect();
-    setupBackToTop();
-    setupActiveNavigation(); // Un seul appel ici
-});
 
 
 function toggleAddressField(selectElement) {
@@ -235,29 +231,6 @@ function toggleAddressField(selectElement) {
         }
     }
 }
-
-// Gestion de la navigation active// Gestion de la navigation active - Version corrigée
-function setupActiveNavigation() {
-    const navLinks = document.querySelectorAll('.nav-link');
-    
-    window.addEventListener('scroll', () => {
-        const fromTop = window.scrollY + 200;
-        
-        navLinks.forEach(link => {
-            const section = document.querySelector(link.getAttribute('href'));
-            
-            if (
-                section.offsetTop <= fromTop &&
-                section.offsetTop + section.offsetHeight > fromTop
-            ) {
-                link.classList.add('active-link');
-            } else {
-                link.classList.remove('active-link');
-            }
-        });
-    });
-}
-
 
 
 
@@ -294,3 +267,87 @@ function setupActiveNavigation() {
                 }, 3000);
             });
         });
+
+
+
+function setupActiveNavigation() {
+  const allNavLinks = [
+    ...document.querySelectorAll('.nav-link'),
+    ...document.querySelectorAll('.mobile-menu .nav-link')
+  ];
+
+  function setActiveLink(targetId) {
+    allNavLinks.forEach(link => {
+      link.classList.toggle('active-link', link.getAttribute('href') === targetId);
+    });
+  }
+
+  // Gestion du clic
+  allNavLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href');
+      
+      if (targetId.startsWith('#')) {
+        e.preventDefault();
+        setActiveLink(targetId);
+        
+        const targetSection = document.querySelector(targetId);
+        if (targetSection) {
+          window.scrollTo({
+            top: targetSection.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+        
+        // Ferme le menu mobile si on clique dedans
+        if (this.closest('.mobile-menu')) {
+          document.getElementById('mobile-menu').classList.add('translate-x-full');
+          document.body.style.overflow = '';
+        }
+      }
+    });
+  });
+
+  // Gestion du scroll
+  window.addEventListener('scroll', throttle(function() {
+    const fromTop = window.scrollY + 100;
+    
+    allNavLinks.forEach(link => {
+      const targetId = link.getAttribute('href');
+      if (targetId.startsWith('#')) {
+        const section = document.querySelector(targetId);
+        if (section) {
+          if (section.offsetTop <= fromTop && 
+              section.offsetTop + section.offsetHeight > fromTop) {
+            setActiveLink(targetId);
+          }
+        }
+      }
+    });
+  }, 100));
+}
+
+// Helper pour limiter les appels au scroll
+function throttle(func, limit) {
+  let lastFunc;
+  let lastRan;
+  return function() {
+    const context = this;
+    const args = arguments;
+    if (!lastRan) {
+      func.apply(context, args);
+      lastRan = Date.now();
+    } else {
+      clearTimeout(lastFunc);
+      lastFunc = setTimeout(function() {
+        if ((Date.now() - lastRan) >= limit) {
+          func.apply(context, args);
+          lastRan = Date.now();
+        }
+      }, limit - (Date.now() - lastRan));
+    }
+  }
+}
+
+// Initialisation
+document.addEventListener('DOMContentLoaded', setupActiveNavigation);

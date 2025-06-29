@@ -31,7 +31,7 @@
 
                 <!-- Navigation Desktop (visible seulement à partir de lg) -->
                 <div class="hidden lg:flex items-center space-x-8">
-                    <a href="#accueil" class="nav-link font-medium text-gray-700 hover:text-primary dark:text-gray-300 dark:hover:text-blue-400">Accueil</a>
+                    <a href="#accueil" class="nav-link active-link font-medium text-gray-700 hover:text-primary dark:text-gray-300 dark:hover:text-blue-400">Accueil</a>
                     <a href="#abonnements" class="nav-link font-medium text-gray-700 hover:text-primary dark:text-gray-300 dark:hover:text-blue-400">Abonnements</a>
                     <a href="#menu" class="nav-link font-medium text-gray-700 hover:text-primary dark:text-gray-300 dark:hover:text-blue-400">Menu</a>
                     <a href="#fonctionnement" class="nav-link font-medium text-gray-700 hover:text-primary dark:text-gray-300 dark:hover:text-blue-400">Fonctionnement</a>
