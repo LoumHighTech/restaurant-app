@@ -3,7 +3,7 @@ session_start();
 
 // Redirection si non connecté
 if (!isset($_SESSION['auth'])) {
-    header('Location: login.php');
+    header('Location: accueil.php');
     exit;
 }
 ?>

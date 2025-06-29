@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+// Redirection si non connecté
+if (!isset($_SESSION['auth'])) {
+    header('Location: accueil.php');
+    exit;
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -25,8 +36,12 @@
                         <i class="fas fa-motorcycle text-2xl"></i>
                     </div>
                     <div>
-                        <h1 class="text-xl sm:text-2xl font-bold">Tableau de bord livreur</h1>
-                        <p class="text-gray-300 text-sm sm:text-base">Amadou Ba - Livreur</p>
+                        <h1 class="text-xl md:text-2xl font-bold">Tableau de bord Livreur</h1>
+                        <?php if (isset($_SESSION['auth'])): ?>
+                            <p class="text-gray-300 text-sm md:text-base">Bienvenue, <?php echo htmlspecialchars($_SESSION['auth']['nom']); ?></p>
+                        <?php else: ?>
+                            <p class="text-gray-300 text-sm md:text-base">Bienvenue</p>
+                        <?php endif; ?>
                     </div>
                 </div>
 

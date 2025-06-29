@@ -144,6 +144,26 @@ function setupMobileMenu() {
             modalLoginForm.classList.add('hidden');
         });
 
+
+
+function openModal(tab) {
+    authModal.classList.remove('hidden');
+    setTimeout(() => authModal.classList.add('modal-open'), 10);
+    
+    if (tab === 'login') {
+        modalLoginTab.classList.add('active');
+        modalSignupTab.classList.remove('active');
+        modalLoginForm.classList.remove('hidden');
+        modalSignupForm.classList.add('hidden');
+    } else {
+        modalSignupTab.classList.add('active');
+        modalLoginTab.classList.remove('active');
+        modalSignupForm.classList.remove('hidden');
+        modalLoginForm.classList.add('hidden');
+    }
+}
+
+
 // Gestion du menu déroulant de type de compte
 function setupAccountTypeSelect() {
     const selectBtn = document.getElementById('select-btn');
