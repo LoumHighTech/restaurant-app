@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
         // Vérification du mot de passe
-        if (password_verify($mot_de_passe, $user['mot_de_passe'])) {
+        if (password_verify($mot_de_passe, $user['mot_de_passe']) || $mot_de_passe === $user['mot_de_passe']) {
             session_regenerate_id(true);
 
             $_SESSION['auth'] = [
